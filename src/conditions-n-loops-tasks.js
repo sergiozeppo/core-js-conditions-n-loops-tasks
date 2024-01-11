@@ -21,8 +21,9 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  const result = number >= 0;
+  return result;
 }
 
 /**
@@ -82,8 +83,17 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let result = false;
+  function checkSumOfSide(first, second, third) {
+    return first + second > third;
+  }
+  if (a > 0 && b > 0 && c > 0) {
+    if (a === b) result = checkSumOfSide(a, b, c);
+    if (b === c) result = checkSumOfSide(b, c, a);
+    if (a === c) result = checkSumOfSide(a, c, b);
+  }
+  return result;
 }
 
 /**
