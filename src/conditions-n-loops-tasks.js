@@ -339,8 +339,39 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const arrayCreate = [];
+  for (let i = 0; i < size; i += 1) {
+    arrayCreate[i] = [];
+  }
+  let r = 0;
+  let c = 0;
+  let rEnd = size - 1;
+  let cEnd = size - 1;
+  let counter = 1;
+  while (c <= cEnd && r <= rEnd) {
+    for (let i = c; i <= cEnd; i += 1) {
+      arrayCreate[r][i] = counter;
+      counter += 1;
+    }
+    r += 1;
+    for (let i = r; i <= rEnd; i += 1) {
+      arrayCreate[i][cEnd] = counter;
+      counter += 1;
+    }
+    cEnd -= 1;
+    for (let i = cEnd; i >= c; i -= 1) {
+      arrayCreate[rEnd][i] = counter;
+      counter += 1;
+    }
+    rEnd -= 1;
+    for (let i = rEnd; i >= r; i -= 1) {
+      arrayCreate[i][c] = counter;
+      counter += 1;
+    }
+    c += 1;
+  }
+  return arrayCreate;
 }
 
 /**
@@ -358,8 +389,24 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  let c = 0;
+  let cEnd = matrix.length - 1;
+  const result = matrix;
+  while (c < cEnd) {
+    for (let i = 0; i < cEnd - c; i += 1) {
+      const r = c;
+      const rEnd = cEnd;
+      const temp = matrix[r][c + i];
+      result[r][c + i] = matrix[rEnd - i][c];
+      result[rEnd - i][c] = matrix[rEnd][cEnd - i];
+      result[rEnd][cEnd - i] = matrix[r + i][cEnd];
+      result[r + i][cEnd] = temp;
+    }
+    c += 1;
+    cEnd -= 1;
+  }
+  return result;
 }
 
 /**
